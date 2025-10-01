@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convention Ticket Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+       
+    <!-- Form Page -->
+    <div id="formPage">
+        <div class="main-header">
+            <img src="assets/images/logo-full.svg" alt="Logo" class="logo">
+            <h1 class="main-title">
+                <span>Your Journey to Coding Conf</span>
+                <span>2025 Starts Here</span>
+            </h1>
+        </div>
+        
+        <div class="container">
+            <div class="card">
+                <div class="header">
+                    <p>Secure your spot at next year's biggest codding conference</p>
+                </div>
+                <div class="form-group">
+                    <label>Upload Photo</label>
+                    <label for="photoInput" class="upload-area" id="uploadArea">
+                        <div id="uploadPlaceholder">
+                            <div class="upload-preview-icon">
+                                <img src="assets/images/icon-upload.svg" alt="Placeholder">
+                            </div>
+                            <div class="upload-text">Click to upload photo</div>
+                        </div>
+                        <div id="previewContainer" class="preview-container" style="display: none;">
+                            <img id="previewImage" class="preview-image-small" alt="Preview">
+                            <div class="preview-buttons">
+                                <button type="button" class="btn-change" id="changeBtn">Change</button>
+                                <button type="button" class="btn-remove" id="removeBtn">Remove</button>
+                            </div>
+                        </div>
+                    </label>
+                    <input type="file" id="photoInput" accept="image/*">
+                    <p class="upload-info">ⓘ Upload your photo (JPG or PNG, max size: 500KB).</p>
+                </div>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="fullName" placeholder="John Doe">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="email" placeholder="john@example.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>GitHub Username</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="github" placeholder="@johndoe">
+                    </div>
+                </div>
+
+                <button class="btn-generate" id="generateBtn" disabled>Generate My Ticket</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ticket Page -->
+    <div id="ticketPage" class="ticket-container hidden">
+            <div class="main-header">
+                <img src="assets/images/logo-full.svg" alt="Logo" class="logo">
+            </div>
+    
+        <div class="ticket-header">
+            <h1>Congrats, <span id="headerName" class="highlight-name"></span>!</h1>
+            <p>Your ticket is ready.</p>
+            <div class="email-info">
+                <p>We've emailed your ticket to</p>
+                <p><span id="headerEmail" class="highlight-email"></span> and will send updates in the run up to the event.</p>
+            </div>
+        </div>
+
+        <div class="ticket">
+            <div class="ticket-inner">
+                <div class="ticket-content">
+                    <div class="ticket-top">
+                        <div class="event-info">
+                            <img src="assets/images/logo-mark.svg" alt="Logo" class="ticket-logo">
+                            <div class="event-info-text">
+                                <h2>Coding Conf</h2>
+                                <p>Jan 31, 2025 / Austin, TX</p>
+                            </div>
+                        </div>
+                        <div class="ticket-number-side" id="ticketCode">#0609 CH</div>
+                    </div>
+
+                    <div class="ticket-profile">
+                        <img id="ticketPhoto" class="profile-image" src="" alt="Profile">
+                        <div class="profile-info">
+                            <h3 id="ticketName"></h3>
+                            <div class="profile-detail">
+                                <img src="assets/images/icon-github.svg" alt="GitHub" class="profile-icon-img">
+                                <span id="ticketGithub"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-new-ticket" id="newTicketBtn">Generate Another Ticket</button>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

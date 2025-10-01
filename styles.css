@@ -1,0 +1,473 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Inconsolata, monospace;
+    flex-direction: column; 
+    background-image: 
+        url("assets/images/pattern-squiggly-line-bottom-desktop.svg"),
+        url("assets/images/pattern-squiggly-line-top.svg"),
+        url("assets/images/pattern-circle.svg"),
+        url("assets/images/pattern-circle.svg"),
+        url("assets/images/pattern-lines.svg"),
+        url("assets/images/background-desktop.png");
+    background-size: 
+        auto,
+        auto,
+        300px 300px,
+        300px 300px,
+        cover,
+        cover;
+    background-repeat: 
+        no-repeat,
+        no-repeat,
+        no-repeat,
+        no-repeat,
+        no-repeat,
+        no-repeat;
+    background-position: 
+        bottom left,
+        right 100px,
+        70% center,
+        5% -150px,
+        center,
+        center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Remis à center pour centrer verticalement */
+    padding: 40px 20px; /* Marges haut/bas de 40px */
+}
+.main-header {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 900px; /* Augmenté de 600px à 900px pour être plus large */
+}
+
+.main-title {
+    font-size: 46px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    line-height: 1.2;
+    max-width: 900px; /* Augmenté aussi */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logo {
+    width: 200px;
+    margin-bottom: 30px; /* réduit de 50px à 30px */
+}
+
+
+
+.main-title br {
+    display: block; /* Force le <br> à fonctionner */
+}
+.main-title span {
+    display: block;
+}
+.subtitle {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 650px;
+    width: 100%;
+    padding-top: 10px;
+}
+.ticket-container {
+    max-width: 650px;
+    width: 100%;
+    padding-top: 10px;
+    margin-top: auto; /* Pousse le contenu vers le centre */
+    margin-bottom: auto; /* Pousse le contenu vers le centre */
+}
+
+.card {
+    background: transparent;
+    border-radius: 12px;
+    padding: 50px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 32px;
+    color: #1a1a2e;
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: white;
+    font-size: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #fff !important;
+    font-weight: 500;
+    font-size: 16px;
+}
+.upload-info {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 8px;
+}
+.upload-area {
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.upload-area:hover {
+    border-color: #fff;
+}
+
+.upload-area.has-image {
+    padding: 0;
+}
+
+.upload-icon {
+    font-size: 40px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.upload-text {
+    color: #666;
+    font-size: 14px;
+}
+
+.preview-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    display: none;
+}
+
+.preview-image.show {
+    display: block;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 18px;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    padding: 16px 18px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    font-size: 16px;
+    background: transparent;
+    color: white;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-generate {
+    width: 100%;
+    padding: 15px;
+    background: #f87171;
+    color: #1a1a2e;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-generate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+}
+
+.btn-generate:disabled {
+    background: #f87171;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Container pour l'image preview + boutons */
+.preview-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Image en petit */
+.preview-image-small {
+    width: 70px;
+    height: 70px;
+    margin-top: 10px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Container des boutons */
+.preview-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Style des boutons Change et Remove */
+.btn-change,
+.btn-remove {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 10px;
+}
+
+.btn-change {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-change:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-remove {
+    background: rgba(248, 113, 113, 0.2);
+    color: #f87171;
+    border: 2px solid rgba(248, 113, 113, 0.3);
+}
+
+.btn-remove:hover {
+    background: rgba(248, 113, 113, 0.3);
+    border-color: rgba(248, 113, 113, 0.5);
+}
+
+/* Ticket Header */
+.ticket-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.ticket-header h1 {
+    font-size: 48px;
+    color: white;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.highlight-name {
+    color: #f87171;
+}
+
+.ticket-header > p {
+    color: white;
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.email-info {
+    margin-top: 20px;
+}
+
+.email-info p {
+    color: #ccc;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.highlight-email {
+    color: #f87171;
+}
+
+/* Ticket */
+.ticket {
+    position: relative;
+    background-image: url('assets/images/pattern-ticket.svg');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 50px 50px 40px 50px;
+    min-height: 350px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.ticket-inner {
+    background: transparent;
+    padding: 0;
+    position: relative;
+    height: 100%;
+}
+
+.ticket-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 60px;
+}
+
+/* Alignement du logo, texte à gauche */
+.event-info {
+    display: flex;
+    flex-direction: row; /* Changé de column à row */
+    align-items: center; /* Centre verticalement tous les éléments */
+    gap: 15px; /* Espace entre le logo et le texte */
+}
+
+.ticket-logo {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0; /* Enlevé la marge du bas */
+    flex-shrink: 0; /* Empêche le logo de rétrécir */
+}
+
+.event-info-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.event-info h2 {
+    font-size: 32px;
+    color: white;
+    margin-bottom: 5px;
+    margin-left: 0;
+    font-weight: 700;
+}
+
+.event-info p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin-left: 0;
+}
+
+/* Numéro de ticket vertical au milieu droit */
+.ticket-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 60px;
+    position: relative; /* Important pour le positionnement du numéro */
+}
+
+.ticket-number-side {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 20px;
+    font-weight: 700;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: 2px;
+    position: absolute;
+    right: -30px; /* Ajustez cette valeur pour le déplacer plus à droite */
+    top: 100%;
+    transform: translateY(-50%);
+}
+
+.ticket-profile {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.profile-info h3 {
+    font-size: 28px;
+    color: white;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.profile-detail {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 15px;
+}
+
+.profile-icon {
+    font-size: 16px;
+}
+
+.btn-new-ticket {
+    display: block;
+    margin: 40px auto 0;
+    padding: 15px 40px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-new-ticket:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.hidden {
+    display: none;
+}
