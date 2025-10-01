@@ -170,4 +170,4 @@ Areas to improve in future projects:
 
 ## Author
 
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
+- Frontend Mentor - [@Paulochonnn](https://www.frontendmentor.io/profile/Paulochonnn)
