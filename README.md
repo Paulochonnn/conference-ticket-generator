@@ -1,22 +1,18 @@
-# Frontend Mentor - Conference ticket generator solution
+# Conference Ticket Generator
 
-This is a solution to the [Conference ticket generator challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/conference-ticket-generator-oq5gFIU12w). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+This is a solution to the [Conference ticket generator challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/conference-ticket-generator-oq5gFIU12w). 
 
 ## Table of contents
 
 - [Overview](#overview)
   - [The challenge](#the-challenge)
   - [Screenshot](#screenshot)
-  - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
+  - [Challenges faced](#challenges-faced)
   - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
-
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -25,32 +21,18 @@ This is a solution to the [Conference ticket generator challenge on Frontend Men
 Users should be able to:
 
 - Complete the form with their details
-- Receive form validation messages if:
-  - Any field is missed
-  - The email address is not formatted correctly
-  - The avatar upload is too big or the wrong image format
-- Complete the form only using their keyboard
-- Have inputs, form field hints, and error messages announced on their screen reader
-- See the generated conference ticket when they successfully submit the form
-- View the optimal layout for the interface depending on their device's screen size
-- See hover and focus states for all interactive elements on the page
+- Upload a profile photo with preview functionality
+- Change or remove uploaded photo before submission
+- Receive form validation (all fields required before generating ticket)
+- Photo size validation (max 500KB)
+- See the generated conference ticket with their information
+- Generate multiple tickets by resetting the form
+- View hover and focus states for all interactive elements
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
-
-### Links
-
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+![Form Page](./screenshot.jpg)
+![Ticket Page](./screenshot2.jpg)
 
 ## My process
 
@@ -59,61 +41,133 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - Semantic HTML5 markup
 - CSS custom properties
 - Flexbox
-- CSS Grid
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+- Vanilla JavaScript
+- Custom SVG ticket background
+- FileReader API for image upload
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+This was my first JavaScript project, and I learned several fundamental concepts:
 
-To see how you can add code snippets, see below:
+**1. DOM Manipulation**
+```js
+const photoInput = document.getElementById('photoInput');
+const previewImage = document.getElementById('previewImage');
+```
 
+**2. Event Listeners**
+```js
+photoInput.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    // Handle file upload
+});
+```
+
+**3. FileReader API**
+```js
+const reader = new FileReader();
+reader.onload = function(e) {
+    previewImage.src = e.target.result;
+};
+reader.readAsDataURL(file);
+```
+
+**4. Form Validation**
+```js
+function checkFormValidity() {
+    const hasPhoto = previewImage.src !== '';
+    const hasName = fullNameInput.value.trim() !== '';
+    // Enable button only when all fields are filled
+}
+```
+
+**5. CSS Background Images**
+Using a custom SVG as the ticket background instead of creating the design purely with CSS:
+```css
+.ticket {
+    background-image: url('assets/images/pattern-ticket.svg');
+    background-size: 100% 100%;
+}
+```
+
+**6. CSS Positioning**
+Learning to position elements precisely, especially the vertical ticket number:
+```css
+.ticket-number-side {
+    writing-mode: vertical-rl;
+    position: absolute;
+    right: -30px;
+    top: 100%;
+    transform: translateY(-50%);
+}
+```
+
+### Challenges faced
+
+**1. CSS Vertical Centering Issues**
+The biggest challenge was controlling vertical positioning with `justify-content: center` on the body. This caused unexpected behavior where elements wouldn't move when adjusting margins. The solution was understanding that flexbox centering overrides standard margin adjustments.
+
+**Solution:** Changed from `justify-content: center` to `justify-content: flex-start` and used `margin: auto` on containers when needed.
+
+**2. Aligning Logo with Text**
+Initially struggled to align the ticket logo horizontally with "Coding Conf" text. The elements were stacking vertically instead of side-by-side.
+
+**Solution:** 
 ```html
-<h1>Some HTML code I'm proud of</h1>
+<div class="event-info">
+    <img src="logo.svg" class="ticket-logo">
+    <div class="event-info-text">
+        <h2>Coding Conf</h2>
+        <p>Date info</p>
+    </div>
+</div>
 ```
 ```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
+.event-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
 }
 ```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+**3. Photo Upload Preview**
+Creating a preview system where users could see, change, or remove their uploaded photo required careful state management and UI updates.
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+**Solution:** Used separate containers (placeholder and preview) that toggle visibility, with buttons that properly prevent event bubbling using `e.stopPropagation()`.
+
+**4. Vertical Ticket Number Positioning**
+Positioning the ticket number vertically and centering it on the right side of the ticket was tricky due to nested positioning contexts.
+
+**Solution:** Used `position: absolute` on the number relative to the ticket-inner container, with `top: 50%` and `transform: translateY(-50%)` for vertical centering.
+
+**5. JavaScript Variable References**
+Initially had errors because the code referenced `ticketEmail` element that didn't exist in the updated HTML structure.
+
+**Solution:** Careful review of all JavaScript variables to ensure they matched the actual HTML element IDs, and created separate variables for `headerName` and `headerEmail`.
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+Areas to improve in future projects:
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+- Better understanding of CSS positioning contexts (relative, absolute, fixed)
+- More efficient CSS organization and naming conventions
+- Form validation with proper error messages (not just alerts)
+- Accessibility improvements (ARIA labels, keyboard navigation)
+- Responsive design for mobile devices
+- Image compression before upload
+- Better file type validation
+- Loading states and animations
 
-### Useful resources
+### Key Takeaways
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- Always check that CSS flexbox properties (especially `justify-content` and `align-items`) aren't interfering with positioning
+- DOM element references in JavaScript must exactly match HTML IDs
+- `e.stopPropagation()` is essential when buttons are inside clickable containers
+- SVG backgrounds can be easier than pure CSS for complex designs
+- Writing-mode property is powerful for vertical text
+- FileReader API is straightforward for client-side image handling
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
 - Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
